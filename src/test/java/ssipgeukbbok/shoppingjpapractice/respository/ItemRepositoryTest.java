@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ssipgeukbbok.shoppingjpapractice.contstant.ItemSellStatus;
+import ssipgeukbbok.shoppingjpapractice.dto.ItemDto;
 import ssipgeukbbok.shoppingjpapractice.entity.Item;
 
 import javax.persistence.EntityNotFoundException;
@@ -63,6 +64,8 @@ class ItemRepositoryTest {
     void findByItemNameOrItemDetailTest() {
         List<Item> items = itemRepository.findByItemNameOrItemDetail("상품1", "상품 상세10");
 
+
+        ItemDto itemDto = new ItemDto();
         assertThat(items).hasSize(3);
     }
 }
