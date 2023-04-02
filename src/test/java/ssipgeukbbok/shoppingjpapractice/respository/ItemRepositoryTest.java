@@ -1,21 +1,18 @@
 package ssipgeukbbok.shoppingjpapractice.respository;
 
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ssipgeukbbok.shoppingjpapractice.contstant.ItemSellStatus;
-import ssipgeukbbok.shoppingjpapractice.dto.ItemDto;
-import ssipgeukbbok.shoppingjpapractice.entity.Item;
+import ssipgeukbbok.shoppingjpapractice.domain.Item;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @DisplayName("리포지토리 테스트")
@@ -63,9 +60,6 @@ class ItemRepositoryTest {
     @Test
     void findByItemNameOrItemDetailTest() {
         List<Item> items = itemRepository.findByItemNameOrItemDetail("상품1", "상품 상세10");
-
-
-        ItemDto itemDto = new ItemDto();
         assertThat(items).hasSize(3);
     }
 }

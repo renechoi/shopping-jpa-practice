@@ -1,7 +1,7 @@
-package ssipgeukbbok.shoppingjpapractice.entity;
+package ssipgeukbbok.shoppingjpapractice.domain;
 
 import lombok.*;
-import ssipgeukbbok.shoppingjpapractice.contstant.ItemSellStatus;
+import ssipgeukbbok.shoppingjpapractice.domain.contstant.ItemSellStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
