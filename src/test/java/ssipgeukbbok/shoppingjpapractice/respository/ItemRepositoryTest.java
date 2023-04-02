@@ -5,8 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ssipgeukbbok.shoppingjpapractice.contstant.ItemSellStatus;
 import ssipgeukbbok.shoppingjpapractice.domain.Item;
+import ssipgeukbbok.shoppingjpapractice.domain.contstant.ItemSellStatus;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
