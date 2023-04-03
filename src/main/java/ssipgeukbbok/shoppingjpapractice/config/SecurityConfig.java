@@ -29,13 +29,13 @@ public class SecurityConfig {
                         .mvcMatchers(
                                 HttpMethod.GET,
                                 "/",
-                                "/memebers/**",
+                                "/members/**",
                                 "item/**",
                                 "/login",
                                 "/member/login/error"
 
                         ).permitAll()
-                        .mvcMatchers("/admin/**").hasAnyRole(rolesAboveManager)
+                        .mvcMatchers("/admin/**").hasAnyRole(rolesAboveManager) // 위에 설정한 ROLE이면 접근 가능
 //                        .mvcMatchers(HttpMethod.DELETE, "/**").hasAnyRole(rolesAboveManager)
                         .anyRequest().authenticated())
                 .formLogin(formLogin ->

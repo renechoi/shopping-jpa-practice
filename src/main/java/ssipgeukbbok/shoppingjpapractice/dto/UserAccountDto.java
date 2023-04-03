@@ -24,7 +24,6 @@ public class UserAccountDto {
     private String modifiedBy;
 
     public static UserAccountDto from (UserAccount userAccount){
-        System.out.println("userAccount = " + userAccount);
         return new UserAccountDto(
                 userAccount.getName(),
                 userAccount.getEmail(),
