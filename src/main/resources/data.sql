@@ -13,9 +13,14 @@ VALUES (1000, '상품 상세1', '상품1', 'SELL', 10000, NOW(), NOW()),
 
 
 INSERT INTO user_account(name, email, address, password, role_type,  created_by, modified_by,created_at, modified_at)
-VALUES ("kim", "admin@admin.com", "서울시 강서구", "{noop}1234", "ADMIN", "kim", "kim", now(),now()),
-("lee", "user@user.com", "서울시 강남구", "{noop}1234", "USER", "lee", "lee", now(),now()),
-("yoo", "yoo@user.com", "서울시 금천구 가산동", "{noop}1234", "SELLER", "yoo", "yoo", now(),now()),
-("jin", "jin@user.com", "서울시 서초구", "{noop}1234", "USER", "jin", "jin", now(),now()),
-("park", "park@user.com", "서울시 종로구", "{noop}1234", "SELLER", "park", "park", now(),now());
+VALUES ('kim', 'admin@admin.com', '서울시 강서구', '{noop}1234', 'ADMIN', 'kim', 'kim', now(),now()),
+('lee', 'user@user.com', '서울시 강남구', '{noop}1234', 'USER', 'lee', 'lee', now(),now()),
+('yoo', 'yoo@user.com', '서울시 금천구 가산동', '{noop}1234', 'SELLER', 'yoo', 'yoo', now(),now()),
+('jin', 'jin@user.com', '서울시 서초구', '{noop}1234', 'USER', 'jin', 'jin', now(),now()),
+('park', 'park@user.com', '서울시 종로구', '{noop}1234', 'SELLER', 'park', 'park', now(),now());
 
+INSERT INTO cart(user_account_id)
+VALUES
+    (3),
+    (2),
+    (1);
