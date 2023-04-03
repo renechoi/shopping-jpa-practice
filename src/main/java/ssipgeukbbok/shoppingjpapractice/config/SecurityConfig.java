@@ -21,7 +21,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        String[] rolesAboveManager = { RoleType.ADMIN.name(), RoleType.SELLER.name()};
+        String[] rolesAboveManager = {RoleType.ADMIN.name(), RoleType.SELLER.name()};
 
         return http
                 .authorizeHttpRequests(auth -> auth
@@ -32,7 +32,7 @@ public class SecurityConfig {
                                 "/members/**",
                                 "item/**",
                                 "/login",
-                                "/member/login/error"
+                                "/members/login/error"
 
                         ).permitAll()
                         .mvcMatchers("/admin/**").hasAnyRole(rolesAboveManager) // 위에 설정한 ROLE이면 접근 가능

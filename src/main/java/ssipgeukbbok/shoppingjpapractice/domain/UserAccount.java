@@ -7,6 +7,7 @@ import ssipgeukbbok.shoppingjpapractice.domain.contstant.RoleType;
 import javax.persistence.*;
 import java.util.Objects;
 
+
 @Getter
 @Setter
 @ToString(callSuper = true)
