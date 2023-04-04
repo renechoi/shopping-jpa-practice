@@ -40,6 +40,46 @@ class CartRepositoryTest {
     @PersistenceContext
     EntityManager entityManager;
 
+
+    /**
+     * Hibernate:
+     *     select
+     *         cart0_.cart_id as cart_id1_0_0_,
+     *         cart0_.user_account_id as user_acc2_0_0_,
+     *         useraccoun1_.id as id1_5_1_,
+     *         useraccoun1_.created_at as created_2_5_1_,
+     *         useraccoun1_.created_by as created_3_5_1_,
+     *         useraccoun1_.modified_at as modified4_5_1_,
+     *         useraccoun1_.modified_by as modified5_5_1_,
+     *         useraccoun1_.address as address6_5_1_,
+     *         useraccoun1_.email as email7_5_1_,
+     *         useraccoun1_.name as name8_5_1_,
+     *         useraccoun1_.password as password9_5_1_,
+     *         useraccoun1_.role_type as role_ty10_5_1_
+     *     from
+     *         cart cart0_
+     *     left outer join
+     *         user_account useraccoun1_
+     *             on cart0_.user_account_id=useraccoun1_.id
+     *     where
+     *         cart0_.cart_id=?
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     * @throws Exception
+     */
+
     @Test
     @DisplayName("연관관계 매핑 테스트 - 장바구니 조회시 회원을 함께 가져온다")
     void findByCartWithMemberTest() throws Exception{

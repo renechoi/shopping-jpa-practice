@@ -113,11 +113,11 @@
             });
         }
 
-        function orders(){
+        function order(){
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
 
-            var url = "/cart/orders";
+            var url = "/cart/order";
 
             var dataList = new Array();
             var paramData = new Object();
@@ -146,7 +146,7 @@
                 cache   : false,
                 success  : function(result, status){
                     alert("주문이 완료 되었습니다.");
-                    location.href='/orders';
+                    location.href='/order';
                 },
                 error : function(jqXHR, status, error){
 
@@ -256,7 +256,7 @@
         </h2>
 
         <div class="text-center mt-3">
-            <button type="button" class="btn btn-primary btn-lg" onclick="orders()">주문하기</button>
+            <button type="button" class="btn btn-primary btn-lg" onclick="order()">주문하기</button>
         </div>
 
     </div>
