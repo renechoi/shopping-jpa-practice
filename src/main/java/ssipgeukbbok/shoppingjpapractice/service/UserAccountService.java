@@ -1,13 +1,9 @@
 package ssipgeukbbok.shoppingjpapractice.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ssipgeukbbok.shoppingjpapractice.domain.UserAccount;
+import ssipgeukbbok.shoppingjpapractice.domain.user.UserAccount;
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.RoleType;
 import ssipgeukbbok.shoppingjpapractice.dto.UserAccountDto;
 import ssipgeukbbok.shoppingjpapractice.exception.UserAccountDuplicateException;

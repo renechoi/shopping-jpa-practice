@@ -1,9 +1,10 @@
-package ssipgeukbbok.shoppingjpapractice.domain;
+package ssipgeukbbok.shoppingjpapractice.domain.item;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import ssipgeukbbok.shoppingjpapractice.domain.user.UserAccount;
 
 import javax.persistence.*;
 

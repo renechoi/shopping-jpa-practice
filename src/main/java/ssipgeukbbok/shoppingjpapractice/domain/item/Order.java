@@ -1,8 +1,9 @@
-package ssipgeukbbok.shoppingjpapractice.domain;
+package ssipgeukbbok.shoppingjpapractice.domain.item;
 
 import lombok.Getter;
 import lombok.Setter;
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.OrderStatus;
+import ssipgeukbbok.shoppingjpapractice.domain.user.UserAccount;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

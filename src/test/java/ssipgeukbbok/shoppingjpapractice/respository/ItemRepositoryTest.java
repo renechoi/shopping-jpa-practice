@@ -5,8 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ssipgeukbbok.shoppingjpapractice.domain.Item;
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.ItemSellStatus;
+import ssipgeukbbok.shoppingjpapractice.domain.item.Item;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
@@ -29,8 +29,8 @@ class ItemRepositoryTest {
 
         Item item3 = Item.of(
                 "상품",
-                1000,
-                10000,
+                1000L,
+                10000L,
                 "상세",
                 ItemSellStatus.SELL,
                 LocalDateTime.now(),

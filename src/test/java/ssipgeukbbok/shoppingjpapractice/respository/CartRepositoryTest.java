@@ -1,26 +1,20 @@
 package ssipgeukbbok.shoppingjpapractice.respository;
 
-import lombok.RequiredArgsConstructor;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
-import ssipgeukbbok.shoppingjpapractice.domain.Cart;
-import ssipgeukbbok.shoppingjpapractice.domain.UserAccount;
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.RoleType;
-import ssipgeukbbok.shoppingjpapractice.dto.UserAccountDto;
+import ssipgeukbbok.shoppingjpapractice.domain.item.Cart;
+import ssipgeukbbok.shoppingjpapractice.domain.user.UserAccount;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Transactional
 @SpringBootTest

@@ -2,17 +2,14 @@ package ssipgeukbbok.shoppingjpapractice.service;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import ssipgeukbbok.shoppingjpapractice.domain.UserAccount;
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.RoleType;
+import ssipgeukbbok.shoppingjpapractice.domain.user.UserAccount;
 import ssipgeukbbok.shoppingjpapractice.dto.UserAccountDto;
 import ssipgeukbbok.shoppingjpapractice.respository.UserAccountRepository;
 

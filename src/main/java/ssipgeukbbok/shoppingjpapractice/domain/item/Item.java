@@ -1,4 +1,4 @@
-package ssipgeukbbok.shoppingjpapractice.domain;
+package ssipgeukbbok.shoppingjpapractice.domain.item;
 
 import lombok.*;
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.ItemSellStatus;
@@ -22,10 +22,10 @@ public class Item {
     private String itemName;
 
     @Column(name="price", nullable = false)
-    private int price;
+    private Long price;
 
     @Column(nullable = false)
-    private int itemAmount;
+    private Long stockAmount;
 
     @Lob
     @Column(nullable = false)
@@ -39,17 +39,17 @@ public class Item {
     private LocalDateTime updatedAt;
 
 
-    private Item(String itemName, int price, int itemAmount, String itemDetail, ItemSellStatus itemSellStatus, LocalDateTime registeredAt, LocalDateTime updatedAt) {
+    private Item(String itemName, Long price, Long stockAmount, String itemDetail, ItemSellStatus itemSellStatus, LocalDateTime registeredAt, LocalDateTime updatedAt) {
         this.itemName = itemName;
         this.price = price;
-        this.itemAmount = itemAmount;
+        this.stockAmount = stockAmount;
         this.itemDetail = itemDetail;
         this.itemSellStatus = itemSellStatus;
         this.registeredAt = registeredAt;
         this.updatedAt = updatedAt;
     }
 
-    public static Item of(String itemName, int price, int itemAmount, String itemDetail, ItemSellStatus itemSellStatus, LocalDateTime registeredAt, LocalDateTime updatedAt) {
-        return new Item(itemName,price,itemAmount,itemDetail,itemSellStatus,registeredAt,updatedAt);
+    public static Item of(String itemName, Long price, Long stockAmount, String itemDetail, ItemSellStatus itemSellStatus, LocalDateTime registeredAt, LocalDateTime updatedAt) {
+        return new Item(itemName,price,stockAmount,itemDetail,itemSellStatus,registeredAt,updatedAt);
     }
 }

@@ -9,8 +9,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import ssipgeukbbok.shoppingjpapractice.controller.UserAccountController;
-import ssipgeukbbok.shoppingjpapractice.domain.UserAccount;
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.RoleType;
+import ssipgeukbbok.shoppingjpapractice.domain.user.UserAccount;
 import ssipgeukbbok.shoppingjpapractice.dto.UserAccountDto;
 import ssipgeukbbok.shoppingjpapractice.service.UserAccountService;
 

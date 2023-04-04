@@ -1,7 +1,8 @@
-package ssipgeukbbok.shoppingjpapractice.domain;
+package ssipgeukbbok.shoppingjpapractice.domain.user;
 
 import lombok.*;
 import ssipgeukbbok.shoppingjpapractice.config.PasswordEncoderConfig;
+import ssipgeukbbok.shoppingjpapractice.domain.AuditingFields;
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.RoleType;
 
 import javax.persistence.*;

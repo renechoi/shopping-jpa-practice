@@ -1,7 +1,7 @@
 package ssipgeukbbok.shoppingjpapractice.respository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ssipgeukbbok.shoppingjpapractice.domain.Item;
+import ssipgeukbbok.shoppingjpapractice.domain.item.Item;
 
 import java.util.List;
 

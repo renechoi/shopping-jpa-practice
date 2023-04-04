@@ -1,4 +1,4 @@
-INSERT INTO item(item_amount, item_detail, item_name, item_sell_status, price, registered_at, updated_at)
+INSERT INTO item(stock_amount, item_detail, item_name, item_sell_status, price, registered_at, updated_at)
 VALUES (1000, '상품 상세1', '상품1', 'SELL', 10000, NOW(), NOW()),
        (500, '상품 상세3', '상품2', 'SELL', 30000, NOW(), NOW()),
        (300, '상품 상세5', '상품3', 'SELL', 50000, NOW(), NOW()),

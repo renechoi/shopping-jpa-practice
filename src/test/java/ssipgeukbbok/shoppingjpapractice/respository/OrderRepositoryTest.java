@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-import ssipgeukbbok.shoppingjpapractice.domain.Item;
-import ssipgeukbbok.shoppingjpapractice.domain.Order;
-import ssipgeukbbok.shoppingjpapractice.domain.OrderItem;
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.ItemSellStatus;
+import ssipgeukbbok.shoppingjpapractice.domain.item.Item;
+import ssipgeukbbok.shoppingjpapractice.domain.item.Order;
+import ssipgeukbbok.shoppingjpapractice.domain.item.OrderItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -49,7 +49,7 @@ class OrderRepositoryTest {
 
         for (int i =0; i<3; i++){
 
-            Item item = Item.of("item name", i * 10000, i * 10, "상세설명", ItemSellStatus.SELL, now, now);
+            Item item = Item.of("item name", i * 10000L, i * 10L, "상세설명", ItemSellStatus.SELL, now, now);
             itemRepository.save(item);
 
             OrderItem orderItem = OrderItem.of(item, order, 1000, 10, now, now);

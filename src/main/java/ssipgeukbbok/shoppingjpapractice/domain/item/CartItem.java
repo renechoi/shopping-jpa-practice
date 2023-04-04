@@ -1,4 +1,4 @@
-package ssipgeukbbok.shoppingjpapractice.domain;
+package ssipgeukbbok.shoppingjpapractice.domain.item;
 
 import lombok.Getter;
 import lombok.Setter;

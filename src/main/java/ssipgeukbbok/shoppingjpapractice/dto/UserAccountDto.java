@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.RoleType;
-import ssipgeukbbok.shoppingjpapractice.domain.UserAccount;
+import ssipgeukbbok.shoppingjpapractice.domain.user.UserAccount;
 
 import java.time.LocalDateTime;
 
