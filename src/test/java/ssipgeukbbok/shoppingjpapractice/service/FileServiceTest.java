@@ -39,10 +39,10 @@ class FileServiceTest {
 
 
 
-    @AfterEach
-    void tearDown() throws IOException {
-        restoreFile(DELETE_FILE_PATH+".backup", DELETE_FILE_PATH);
-    }
+//    @AfterEach
+//    void tearDown() throws IOException {
+//        restoreFile(DELETE_FILE_PATH+".backup", DELETE_FILE_PATH);
+//    }
 
     @Test
     @DisplayName("파일 삭제 테스트")
@@ -56,6 +56,8 @@ class FileServiceTest {
 
         // Then
         assertThat(new File(filePath).exists()).isFalse();
+
+        restoreFile(DELETE_FILE_PATH+".backup", DELETE_FILE_PATH);
     }
 
 

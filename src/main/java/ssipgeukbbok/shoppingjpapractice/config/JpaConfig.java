@@ -28,14 +28,30 @@ public class JpaConfig {
      *
      */
 
+
     @Bean
     public AuditorAware<String> auditorAware() {
-        return () -> Optional.ofNullable(SecurityContextHolder.getContext())
+        return () -> Optional.of(Optional.ofNullable(SecurityContextHolder.getContext())
                 .map(SecurityContext::getAuthentication)
                 .filter(Authentication::isAuthenticated)
                 .map(Authentication::getPrincipal)
                 .map(UserAccountPrincipal.class::cast)
-                .map(UserAccountPrincipal::getUsername);
+                .map(UserAccountPrincipal::getUsername)
+                .orElse("anonymousUser"));
     }
+
+//
+//    @Bean
+//    public AuditorAware<UserAccountPrincipal> auditorAware() {
+//        return () -> {
+//            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//
+//            if (authentication == null || !authentication.isAuthenticated()) {
+//                return Optional.empty();
+//            }
+//
+//            return Optional.of(((UserAccountPrincipal) authentication.getPrincipal()));
+//        };
+//    }
 
 }

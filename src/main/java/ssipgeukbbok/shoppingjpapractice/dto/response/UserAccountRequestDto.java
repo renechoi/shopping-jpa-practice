@@ -1,4 +1,4 @@
-package ssipgeukbbok.shoppingjpapractice.dto.request;
+package ssipgeukbbok.shoppingjpapractice.dto.response;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;

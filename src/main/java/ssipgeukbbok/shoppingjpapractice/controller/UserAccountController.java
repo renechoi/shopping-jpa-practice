@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.RoleType;
 import ssipgeukbbok.shoppingjpapractice.dto.UserAccountDto;
-import ssipgeukbbok.shoppingjpapractice.dto.request.UserAccountRequestDto;
+import ssipgeukbbok.shoppingjpapractice.dto.response.UserAccountRequestDto;
 import ssipgeukbbok.shoppingjpapractice.service.UserAccountService;
 
 import javax.validation.Valid;
