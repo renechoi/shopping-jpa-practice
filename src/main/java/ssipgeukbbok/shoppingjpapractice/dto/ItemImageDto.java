@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ssipgeukbbok.shoppingjpapractice.domain.item.ItemImage;
 
 @Data
 @NoArgsConstructor
@@ -26,7 +27,13 @@ public class ItemImageDto {
         this.representativeImageYn = representativeImageYn;
     }
 
+    public static ItemImageDto of(ItemImage itemImage){
+        return ItemImageDto.of(itemImage.getImageName(), itemImage.getOriginalImageName(), itemImage.getImageUrl(), itemImage.getRepresentativeImageYn());
+    }
+
     public static ItemImageDto of(String imageName, String originalImageName, String imageUrl, String representativeImageYn){
         return new ItemImageDto(imageName,originalImageName,imageUrl,representativeImageYn);
     }
+
+
 }

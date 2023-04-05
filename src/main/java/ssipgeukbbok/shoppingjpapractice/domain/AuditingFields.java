@@ -1,6 +1,7 @@
 package ssipgeukbbok.shoppingjpapractice.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -15,6 +16,7 @@ import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @ToString
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass

@@ -104,11 +104,10 @@ class ItemServiceTest {
         List<MultipartFile> multipartFileList = createMultipartFiles();
         Long itemId = itemService.saveAll(itemResponse, multipartFileList);
 
-        // When
+        // When & then
         Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
         List<ItemImage> itemImages = itemImageRepository.findByItemIdOrderByIdAsc(itemId);
 
-        // Then
         assertAll(
                 () -> assertEquals(itemResponse.getItemName(), item.getItemName()),
                 () -> assertEquals(itemResponse.getItemSellStatus(), item.getItemSellStatus()),

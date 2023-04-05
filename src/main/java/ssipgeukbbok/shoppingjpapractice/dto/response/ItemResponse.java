@@ -69,6 +69,10 @@ public class ItemResponse {
         );
     }
 
+    public static ItemResponse of(Item item){
+        return ItemResponse.of(item.getItemName(), item.getPrice(), item.getItemDetail(), item.getStockAmount(), item.getItemSellStatus());
+    }
+
 
 
 

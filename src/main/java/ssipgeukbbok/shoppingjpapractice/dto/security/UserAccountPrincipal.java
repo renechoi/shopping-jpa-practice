@@ -3,6 +3,7 @@ package ssipgeukbbok.shoppingjpapractice.dto.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ssipgeukbbok.shoppingjpapractice.domain.AuditingFields;
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.RoleType;
 import ssipgeukbbok.shoppingjpapractice.dto.UserAccountDto;
 
@@ -10,7 +11,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class UserAccountPrincipal implements UserDetails {
+public class UserAccountPrincipal extends AuditingFields implements UserDetails{
     private String name;
     private String password;
     private String email;
