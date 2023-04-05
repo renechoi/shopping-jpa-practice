@@ -102,7 +102,7 @@ class ItemServiceTest {
         // Given
         ItemResponse itemResponse = ItemResponse.of("테스트상품", 1000L, "상품 디테일", 1000L, ItemSellStatus.SELL);
         List<MultipartFile> multipartFileList = createMultipartFiles();
-        Long itemId = itemService.saveAll(itemResponse, multipartFileList);
+        Long itemId = itemService.saveItem(itemResponse, multipartFileList);
 
         // When & then
         Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);

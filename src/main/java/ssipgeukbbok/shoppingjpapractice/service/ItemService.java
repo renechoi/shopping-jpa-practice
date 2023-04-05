@@ -12,6 +12,7 @@ import ssipgeukbbok.shoppingjpapractice.domain.item.Item;
 import ssipgeukbbok.shoppingjpapractice.domain.item.ItemImage;
 import ssipgeukbbok.shoppingjpapractice.dto.ItemImageDto;
 import ssipgeukbbok.shoppingjpapractice.dto.ItemSearchDto;
+import ssipgeukbbok.shoppingjpapractice.dto.MainItemDto;
 import ssipgeukbbok.shoppingjpapractice.dto.request.ItemRequest;
 import ssipgeukbbok.shoppingjpapractice.dto.response.ItemResponse;
 import ssipgeukbbok.shoppingjpapractice.respository.ItemImageRepository;
@@ -63,6 +64,10 @@ public class ItemService {
         return itemRepository.getAdminItemPage(itemSearchDto, pageable);
     }
 
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
+    }
 
     public ItemRequest getItemDetail(Long itemId){
         List<ItemImage> itemImages = itemImageRepository.findByItemIdOrderByIdAsc(itemId);
