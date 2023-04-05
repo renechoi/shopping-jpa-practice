@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import ssipgeukbbok.shoppingjpapractice.domain.item.Item;
 import ssipgeukbbok.shoppingjpapractice.dto.response.ItemResponse;
 import ssipgeukbbok.shoppingjpapractice.service.ItemService;
 
@@ -25,7 +24,7 @@ public class ItemController {
 
     @GetMapping("/admin/item/new")
     public String itemForm(Model model) {
-        model.addAttribute("itemFormDto", new ItemResponse());
+        model.addAttribute("ItemResponse", new ItemResponse());
         return "/item/itemForm";
     }
 
