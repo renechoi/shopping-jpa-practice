@@ -32,18 +32,18 @@ public class OrderItem {
 
     private Long orderPrice;
 
-    private Long stockAmount;
+    private Long orderCount;
 
     private LocalDateTime regTime;
 
     private LocalDateTime updateTime;
 
 
-    public OrderItem(Item item, Order order, Long orderPrice, Long stockAmount, LocalDateTime regTime, LocalDateTime updateTime) {
+    public OrderItem(Item item, Order order, Long orderPrice, Long orderCount, LocalDateTime regTime, LocalDateTime updateTime) {
         this.item = item;
         this.order = order;
         this.orderPrice = orderPrice;
-        this.stockAmount = stockAmount;
+        this.orderCount = orderCount;
         this.regTime = regTime;
         this.updateTime = updateTime;
     }
@@ -56,11 +56,12 @@ public class OrderItem {
 
     public static OrderItem createOrderItem(Item item, Long stockAmount){
         OrderItem orderItem = OrderItem.of(item, null, item.getPrice(), stockAmount, LocalDateTime.now(), LocalDateTime.now());
+        System.out.println("orderItem = " + orderItem);
         item.removeStock(stockAmount);
         return orderItem;
     }
 
     public long getTotalPrice(){
-        return orderPrice * stockAmount;
+        return orderPrice * orderCount;
     }
 }

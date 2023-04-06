@@ -1,4 +1,4 @@
-package ssipgeukbbok.shoppingjpapractice.service;
+package ssipgeukbbok.shoppingjpapractice.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ssipgeukbbok.shoppingjpapractice.dto.ItemSearchDto;
 import ssipgeukbbok.shoppingjpapractice.dto.MainItemDto;
+import ssipgeukbbok.shoppingjpapractice.service.ItemService;
 
 import java.util.Optional;
 

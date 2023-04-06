@@ -19,7 +19,7 @@ public class UserAccountPrincipal extends AuditingFields implements UserDetails{
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserAccountPrincipal(String name, String password, String email, String address,  Set<? extends GrantedAuthority> roleType) {
-        this.name = name;
+        this.name = email;
         this.password = password;
         this.email = email;
         this.address = address;
@@ -28,7 +28,7 @@ public class UserAccountPrincipal extends AuditingFields implements UserDetails{
 
     public static UserAccountPrincipal of(String name, String password, String email, String address, Set<RoleType> roleTypes){
         return new UserAccountPrincipal(
-                name,
+                email,
                 password,
                 email,
                 address,
@@ -41,7 +41,7 @@ public class UserAccountPrincipal extends AuditingFields implements UserDetails{
 
     public static UserAccountPrincipal from(UserAccountDto dto){
         return UserAccountPrincipal.of(
-                dto.getName(),
+                dto.getEmail(),
                 dto.getPassword(),
                 dto.getEmail(),
                 dto.getAddress(),
@@ -57,7 +57,7 @@ public class UserAccountPrincipal extends AuditingFields implements UserDetails{
 
     @Override
     public String getUsername() {
-        return name;
+        return email;
     }
 
 

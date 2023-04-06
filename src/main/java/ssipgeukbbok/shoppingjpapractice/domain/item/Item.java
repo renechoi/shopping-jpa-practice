@@ -66,6 +66,9 @@ public class Item extends AuditingFields {
     }
 
     public void removeStock(Long stockAmount) {
+        System.out.println("stockAmount = " + stockAmount);
+        System.out.println("this.stockAmount = " + this.stockAmount);
+
         if (this.stockAmount < stockAmount) {
             throw new OutOfStockException("상품의 재고가 부족합니다 (현재 재고 수량 : " + this.stockAmount + ")");
         }
