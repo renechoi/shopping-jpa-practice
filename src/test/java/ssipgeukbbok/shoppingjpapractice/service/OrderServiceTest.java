@@ -146,4 +146,24 @@ class OrderServiceTest {
 
         assertThrows(EntityNotFoundException.class, () -> orderService.placeOrder(orderDto, "not_exist@test.com"));
     }
+
+    @Test
+    @DisplayName("주문 취소 테스트")
+    public void cancelOrder(){
+        Item item = createItem();
+        UserAccount member = createUserAccount();
+
+        OrderDto orderDto = new OrderDto();
+        orderDto.setOrderCount(10L);
+        orderDto.setItemId(item.getId());
+        Long orderId = orderService.placeOrder(orderDto, member.getEmail());
+
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(EntityNotFoundException::new);
+        orderService.cancelOrder(orderId);
+
+        assertEquals(OrderStatus.CANCEL, order.getOrderStatus());
+        assertEquals(100, item.getStockAmount());
+    }
+
 }
