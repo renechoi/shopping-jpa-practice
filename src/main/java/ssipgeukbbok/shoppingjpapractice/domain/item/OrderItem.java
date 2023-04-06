@@ -64,4 +64,8 @@ public class OrderItem {
     public long getTotalPrice(){
         return orderPrice * orderCount;
     }
+
+    public void cancel(){
+        this.getItem().addStock(orderCount);
+    }
 }

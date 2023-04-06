@@ -75,5 +75,10 @@ public class Item extends AuditingFields {
         this.stockAmount -= stockAmount;
     }
 
+    public void addStock(Long stockAmount){
+        this.stockAmount += stockAmount;
+    }
+
+
 
 }

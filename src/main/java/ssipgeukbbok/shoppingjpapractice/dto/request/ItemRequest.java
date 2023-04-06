@@ -10,7 +10,7 @@ import ssipgeukbbok.shoppingjpapractice.dto.ItemImageDto;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data(staticConstructor = "of")
+@Data()
 @AllArgsConstructor
 @NoArgsConstructor
 public class ItemRequest {

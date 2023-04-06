@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.StringUtils;
 import ssipgeukbbok.shoppingjpapractice.domain.item.Item;
 import ssipgeukbbok.shoppingjpapractice.domain.item.ItemImage;
 import ssipgeukbbok.shoppingjpapractice.domain.item.Order;
@@ -150,7 +151,6 @@ public class OrderService {
 //    }
 
 
-
 //
 //    public Page<OrderHistoryDto> getOrders(String email, Pageable pageable) {
 //        List<Order> orders = orderRepository.findOrders(email, pageable);
@@ -183,7 +183,6 @@ public class OrderService {
 //    }
 
 
-
 //
 //    public Page<OrderHistoryDto> getOrders(String email, Pageable pageable) {
 //        List<Order> orders = orderRepository.findOrders(email, pageable);
@@ -202,8 +201,8 @@ public class OrderService {
     public Page<OrderHistoryDto> getOrders(String email, Pageable pageable) {
         List<OrderHistoryDto> orderHistoryDtos =
                 orderRepository.findOrders(email, pageable).stream()
-                .map(this::createOrderHistoryDto)
-                .collect(Collectors.toList());
+                        .map(this::createOrderHistoryDto)
+                        .collect(Collectors.toList());
 
         Long totalOrderCounts = orderRepository.countOrder(email);
         return new PageImpl<>(orderHistoryDtos, pageable, totalOrderCounts);
@@ -227,7 +226,6 @@ public class OrderService {
         String imageUrl = itemImage.getImageUrl();
         return new OrderItemDto(orderItem, imageUrl);
     }
-
 
 
 //
@@ -264,7 +262,21 @@ public class OrderService {
 //
 
 
+    @Transactional(readOnly = true)
+    public boolean validateOrder(Long orderId, String email) {
+        UserAccount currentUser = userAccountRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
+        Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
+        UserAccount savedUser = order.getUserAccount();
 
+        return (currentUser == savedUser);
+    }
+
+    public void cancelOrder(Long orderId) {
+        orderRepository.
+                findById(orderId)
+                .orElseThrow(EntityNotFoundException::new)
+                .cancelOrder();
+    }
 
 
 }

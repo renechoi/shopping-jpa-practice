@@ -75,5 +75,11 @@ public class Order {
         return orderItems.stream().mapToLong(OrderItem::getTotalPrice).sum();
 
     }
+
+
+    public void cancelOrder(){
+        this.orderStatus = OrderStatus.CANCEL;
+        orderItems.forEach(OrderItem::cancel);
+    }
 }
 

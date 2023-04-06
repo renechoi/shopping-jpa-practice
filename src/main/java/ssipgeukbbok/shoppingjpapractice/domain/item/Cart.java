@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import ssipgeukbbok.shoppingjpapractice.domain.AuditingFields;
 import ssipgeukbbok.shoppingjpapractice.domain.user.UserAccount;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Cart {
+public class Cart extends AuditingFields {
 
     @Id
     @Column(name ="cart_id")
@@ -31,5 +32,9 @@ public class Cart {
 
     public static Cart of(UserAccount userAccount){
         return new Cart(userAccount);
+    }
+
+    public static Cart createCart(UserAccount userAccount){
+        return Cart.of(userAccount);
     }
 }

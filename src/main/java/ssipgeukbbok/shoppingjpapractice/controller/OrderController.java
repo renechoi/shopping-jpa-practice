@@ -3,6 +3,7 @@ package ssipgeukbbok.shoppingjpapractice.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,5 +57,22 @@ public class OrderController {
 
         return "order/orderHist";
     }
+
+    @PostMapping("/order/{orderId}/cancel")
+    public ResponseEntity cancelOrder (@PathVariable("orderId") Long orderId, Principal principal){
+        if(!orderService.validateOrder(orderId, principal.getName())){
+            return new ResponseEntity("주문 취소 권한이 없습니다", HttpStatus.FORBIDDEN);
+        }
+
+        orderService.cancelOrder(orderId);
+        return ResponseEntity.ok(orderId);
+    }
+
+
+
+
+
+
+
 
 }

@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.RoleType;
 import ssipgeukbbok.shoppingjpapractice.dto.security.UserAccountPrincipal;
 import ssipgeukbbok.shoppingjpapractice.service.UserAccountService;
@@ -46,7 +47,9 @@ public class SecurityConfig {
                                 .usernameParameter("email") // 사용자 계정의 id나 email을 나타내는 파라미터 이름
                                 .passwordParameter("password") // 사용자 계정의 비밀번호를 나타내는 파라미터 이름
                 )
-                .logout(logout -> logout.logoutSuccessUrl("/"))
+                .logout(logout ->
+                        logout.logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
+                                .logoutSuccessUrl("/"))
 
                 .exceptionHandling()
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
