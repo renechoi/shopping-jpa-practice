@@ -77,7 +77,7 @@ class OrderServiceTest {
         UserAccount userAccount = createUserAccount();
 
         OrderDto orderDto = new OrderDto();
-        orderDto.setStockAmount(10L);
+        orderDto.setOrderCount(10L);
         orderDto.setItemId(item.getId());
 
         // when
@@ -92,8 +92,8 @@ class OrderServiceTest {
 
         OrderItem savedOrderItem = savedOrder.getOrderItems().get(0);
         assertEquals(item.getId(), savedOrderItem.getItem().getId());
-        assertEquals(orderDto.getStockAmount(), savedOrderItem.getStockAmount());
-        assertEquals(item.getPrice() * orderDto.getStockAmount(), savedOrder.getTotalPrice());
+        assertEquals(orderDto.getOrderCount(), savedOrderItem.getOrderCount());
+        assertEquals(item.getPrice() * orderDto.getOrderCount(), savedOrder.getTotalPrice());
     }
 
     @Test
@@ -103,7 +103,7 @@ class OrderServiceTest {
         Item item = createItem();
         UserAccount userAccount = createUserAccount();
         OrderDto orderDto = new OrderDto();
-        orderDto.setStockAmount(10L);
+        orderDto.setOrderCount(10L);
         orderDto.setItemId(item.getId());
 
         // when
@@ -118,8 +118,8 @@ class OrderServiceTest {
 
         OrderItem savedOrderItem = savedOrder.getOrderItems().get(0);
         assertEquals(item.getId(), savedOrderItem.getItem().getId());
-        assertEquals(orderDto.getStockAmount(), savedOrderItem.getStockAmount());
-        assertEquals(item.getPrice() * orderDto.getStockAmount(), savedOrder.getTotalPrice());
+        assertEquals(orderDto.getOrderCount(), savedOrderItem.getOrderCount());
+        assertEquals(item.getPrice() * orderDto.getOrderCount(), savedOrder.getTotalPrice());
     }
 
 
@@ -129,7 +129,7 @@ class OrderServiceTest {
         UserAccount userAccount = createUserAccount();
 
         OrderDto orderDto = new OrderDto();
-        orderDto.setStockAmount(200L);
+        orderDto.setOrderCount(200L);
         orderDto.setItemId(101L);
 
         assertThrows(EntityNotFoundException.class, () -> orderService.placeOrder(orderDto, userAccount.getEmail()));
@@ -141,7 +141,7 @@ class OrderServiceTest {
         Item item = createItem();
 
         OrderDto orderDto = new OrderDto();
-        orderDto.setStockAmount(10L);
+        orderDto.setOrderCount(10L);
         orderDto.setItemId(item.getId());
 
         assertThrows(EntityNotFoundException.class, () -> orderService.placeOrder(orderDto, "not_exist@test.com"));

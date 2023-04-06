@@ -62,7 +62,7 @@ public class OrderServiceTest {
         Long orderCount = 2L;
         OrderDto orderDto = new OrderDto();
         orderDto.setItemId(itemId);
-        orderDto.setStockAmount(orderCount);
+        orderDto.setOrderCount(orderCount);
         Item item = new Item();
         item.setId(itemId);
         item.setStockAmount(10L);
@@ -90,7 +90,7 @@ public class OrderServiceTest {
         Long orderCount = 2L;
         OrderDto orderDto = new OrderDto();
         orderDto.setItemId(itemId);
-        orderDto.setStockAmount(orderCount);
+        orderDto.setOrderCount(orderCount);
         Item item = new Item();
         item.setId(itemId);
 
@@ -110,7 +110,7 @@ public class OrderServiceTest {
         Long orderCount = 2L;
         OrderDto orderDto = new OrderDto();
         orderDto.setItemId(itemId);
-        orderDto.setStockAmount(orderCount);
+        orderDto.setOrderCount(orderCount);
 
         Mockito.when(itemRepository.findById(itemId)).thenReturn(java.util.Optional.empty());
         Mockito.when(userAccountRepository.findByEmail(email)).thenReturn(java.util.Optional.of(new UserAccount()));
@@ -128,7 +128,7 @@ public class OrderServiceTest {
         Long orderCount = 0L;
         OrderDto orderDto = new OrderDto();
         orderDto.setItemId(itemId);
-        orderDto.setStockAmount(orderCount);
+        orderDto.setOrderCount(orderCount);
 
         // when, then
         assertThatThrownBy(() -> orderService.placeOrder(orderDto, email)).isInstanceOf(IllegalArgumentException.class);
@@ -143,7 +143,7 @@ public class OrderServiceTest {
         Long orderCount = 2L;
         OrderDto orderDto = new OrderDto();
         orderDto.setItemId(itemId);
-        orderDto.setStockAmount(orderCount);
+        orderDto.setOrderCount(orderCount);
 
         Mockito.when(itemRepository.findById(itemId)).thenReturn(Optional.empty());
         Mockito.when(userAccountRepository.findByEmail(email)).thenReturn(java.util.Optional.of(new UserAccount()));
