@@ -45,18 +45,21 @@ public class ItemController {
             @RequestParam("itemImgFile") List<MultipartFile> itemImageFiles) {
 
         if (bindingResult.hasErrors()) {     // 상품 등록시 필수 값이 없다면 다시 상품 등록 페이지로 전환
+            log.info("errors = {}",bindingResult);
             return "item/itemForm";
         }
 
         // 상품 등록시 첫 번째 이미지가 없다면 에러 메시지와 함게 상품 등록 페이지로 전환
         if (itemImageFiles.get(0).isEmpty() && itemResponse.getId() == null) {
             model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력 값 입니다");
+            log.info("errors 첫번째 상품 이미지는 필수 입력 값 입니다 = {}",itemResponse);
             return "item/itemForm";
         }
 
         try {
             itemService.saveItem(itemResponse, itemImageFiles);
         } catch (Exception e) {
+            log.info("errors = {}", itemResponse, e);
             model.addAttribute("errorMessage", "상품 등록 중 에러가 발생했습니다");
             return "item/itemForm";
         }

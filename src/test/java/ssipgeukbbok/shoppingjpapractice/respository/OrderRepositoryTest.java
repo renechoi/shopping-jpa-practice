@@ -52,7 +52,7 @@ class OrderRepositoryTest {
             Item item = Item.of("item name", i * 10000L, i * 10L, "상세설명", ItemSellStatus.SELL, now, now);
             itemRepository.save(item);
 
-            OrderItem orderItem = OrderItem.of(item, order, 1000, 10, now, now);
+            OrderItem orderItem = OrderItem.of(item, order, 1000L, 10L, now, now);
             order.getOrderItems().add(orderItem);
         }
 

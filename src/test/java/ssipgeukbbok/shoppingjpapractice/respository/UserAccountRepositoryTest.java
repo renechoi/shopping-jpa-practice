@@ -1,5 +1,6 @@
 package ssipgeukbbok.shoppingjpapractice.respository;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,11 @@ import ssipgeukbbok.shoppingjpapractice.domain.contstant.RoleType;
 import ssipgeukbbok.shoppingjpapractice.domain.user.UserAccount;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class UserAccountRepositoryTest {
@@ -37,10 +41,27 @@ class UserAccountRepositoryTest {
 
     @DisplayName("select 테스트")
     @Test
-    void test() {
+    void select() {
         List<UserAccount> userAccounts = userAccountRepository.findAll();
         assertThat(userAccounts).isNotNull().hasSize(4);
     }
+
+
+    @Test
+    public void testFindByEmail() {
+        // Given
+        String email = "admin@admin.com";
+        UserAccount userAccount = new UserAccount();
+        userAccount.setEmail(email);
+
+        // When
+        Optional<UserAccount> foundUserAccount = userAccountRepository.findByEmail(email);
+        System.out.println("foundUserAccount = " + foundUserAccount);
+        // Then
+        assertTrue(foundUserAccount.isPresent());
+        assertEquals(email, foundUserAccount.get().getEmail());
+    }
+
 //
 //    @DisplayName("update 테스트")
 //    @Test

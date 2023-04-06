@@ -4,6 +4,7 @@ import lombok.*;
 import ssipgeukbbok.shoppingjpapractice.domain.AuditingFields;
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.ItemSellStatus;
 import ssipgeukbbok.shoppingjpapractice.dto.response.ItemResponse;
+import ssipgeukbbok.shoppingjpapractice.exception.OutOfStockException;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -63,4 +64,13 @@ public class Item extends AuditingFields {
         this.itemDetail = itemResponse.getItemDetail();
         this.itemSellStatus = itemResponse.getItemSellStatus();
     }
+
+    public void removeStock(Long stockAmount) {
+        if (this.stockAmount < stockAmount) {
+            throw new OutOfStockException("상품의 재고가 부족합니다 (현재 재고 수량 : " + this.stockAmount + ")");
+        }
+        this.stockAmount -= stockAmount;
+    }
+
+
 }

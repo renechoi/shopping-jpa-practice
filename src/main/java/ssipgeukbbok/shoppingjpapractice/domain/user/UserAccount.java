@@ -12,7 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString(callSuper = true)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor()
 @Table(name = "user_account",
         indexes = {
                 @Index(columnList = "email"),
