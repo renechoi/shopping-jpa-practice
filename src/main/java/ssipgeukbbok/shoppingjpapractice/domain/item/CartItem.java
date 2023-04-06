@@ -2,6 +2,7 @@ package ssipgeukbbok.shoppingjpapractice.domain.item;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import ssipgeukbbok.shoppingjpapractice.domain.AuditingFields;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Setter
 @Table(name = "cart_item")
 @Entity
+@ToString
 public class CartItem extends AuditingFields {
 
     @Id
@@ -46,5 +48,9 @@ public class CartItem extends AuditingFields {
 
     public void addItemCount(Long itemCount){
         this.itemCount += itemCount;
+    }
+
+    public void updateCount(Long itemCount){
+        this.itemCount = itemCount;
     }
 }
