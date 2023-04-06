@@ -17,30 +17,30 @@
 
             calculateToalPrice();
 
-            $("#count").change( function(){
+            $("#orderCount").change( function(){
                 calculateToalPrice();
             });
         });
 
         function calculateToalPrice(){
-            var count = $("#count").val();
-            var price = $("#price").val();
-            var totalPrice = price*count;
+            let orderCount = $("#orderCount").val();
+            let price = $("#price").val();
+            let totalPrice = price*orderCount;
             $("#totalPrice").html(totalPrice + '원');
         }
 
         function order(){
             console.log("order")
-            var token = $("meta[name='_csrf']").attr("content");
-            var header = $("meta[name='_csrf_header']").attr("content");
+            let token = $("meta[name='_csrf']").attr("content");
+            let header = $("meta[name='_csrf_header']").attr("content");
 
-            var url = "/order";
-            var paramData = {
+            let url = "/order";
+            let paramData = {
                 itemId : $("#itemId").val(),
-                count : $("#count").val()
+                orderCount : $("#orderCount").val()
             };
 
-            var param = JSON.stringify(paramData);
+            let param = JSON.stringify(paramData);
 
             $.ajax({
                 url      : url,
@@ -77,8 +77,10 @@
             var url = "/cart";
             var paramData = {
                 itemId : $("#itemId").val(),
-                count : $("#count").val()
+                orderCount : $("#orderCount").val()
             };
+
+
 
             var param = JSON.stringify(paramData);
 
@@ -168,7 +170,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">수량</span>
                     </div>
-                    <input type="number" name="count" id="count" class="form-control" value="1" min="1">
+                    <input type="number" name="orderCount" id="orderCount" class="form-control" value="1" min="1">
                 </div>
             </div>
             <hr class="my-4">

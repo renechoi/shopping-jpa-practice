@@ -1,0 +1,37 @@
+footer{
+    margin-top: 100px;
+    width: 100%;
+    color: #60423b;
+    border-top: 1px solid #ecd8d8;
+    border-bottom: 1px solid #ecd8d8;
+    display: none;
+    font-size: 13px;
+    height: 280px ;
+}
+
+footer a{
+    color: #60423b;
+}
+footer a:hover{
+    text-decoration: underline;
+}
+
+footer li{
+
+    margin: 10px 0;
+}
+
+.footer1, .footer2{
+    padding: 40px 100px;
+    width: 50%;
+}
+
+.footer1{
+    border-right: 1px solid #ecd8d8;
+}
+
+.gray{
+    color: #ababab;
+}
+
+

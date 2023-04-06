@@ -33,7 +33,9 @@ public class SecurityConfig {
                                 "/members/**",
                                 "item/**",
                                 "/login",
-                                "/members/login/error"
+                                "/members/login/error",
+                                "/main/**",
+                                "/sr1c/**"
 
                         ).permitAll()
                         .mvcMatchers("/admin/**").hasAnyRole(rolesAboveManager) // 위에 설정한 ROLE이면 접근 가능
