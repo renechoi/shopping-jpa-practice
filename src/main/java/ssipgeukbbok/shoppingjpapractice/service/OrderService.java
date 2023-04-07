@@ -6,7 +6,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.thymeleaf.util.StringUtils;
 import ssipgeukbbok.shoppingjpapractice.domain.item.Item;
 import ssipgeukbbok.shoppingjpapractice.domain.item.ItemImage;
 import ssipgeukbbok.shoppingjpapractice.domain.item.Order;
@@ -21,6 +20,7 @@ import ssipgeukbbok.shoppingjpapractice.respository.OrderRepository;
 import ssipgeukbbok.shoppingjpapractice.respository.UserAccountRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,6 +48,99 @@ public class OrderService {
         Order savedOrder = orderRepository.save(order);
         return savedOrder.getId();
     }
+
+    public Long placeOrders(List<OrderDto> orderDtoList, String email) {
+        UserAccount userAccount = findUserAccountByEmail(email);
+        List<OrderItem> orderItems = createOrderItems(orderDtoList);
+
+        Order order = Order.createOrder(userAccount, orderItems);
+        Order savedOrder = orderRepository.save(order);
+        return savedOrder.getId();
+    }
+
+    private List<OrderItem> createOrderItems(List<OrderDto> orderDtoList) {
+        return orderDtoList.stream()
+                .map(orderDto -> {
+                    Item item = itemRepository.findById(orderDto.getItemId())
+                            .orElseThrow(EntityNotFoundException::new);
+                    return OrderItem.createOrderItem(item, orderDto.getOrderCount());
+                })
+                .collect(Collectors.toList());
+    }
+
+
+    @Transactional(readOnly = true)
+    public boolean validateOrder(Long orderId, String email) {
+        UserAccount currentUser = findUserAccountByEmail(email);
+        Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
+        UserAccount savedUser = order.getUserAccount();
+
+        return (currentUser == savedUser);
+    }
+
+    public void cancelOrder(Long orderId) {
+        orderRepository.
+                findById(orderId)
+                .orElseThrow(EntityNotFoundException::new)
+                .cancelOrder();
+    }
+
+    public Page<OrderHistoryDto> getOrders(String email, Pageable pageable) {
+        List<OrderHistoryDto> orderHistoryDtos =
+                orderRepository.findOrders(email, pageable).stream()
+                        .map(this::createOrderHistoryDto)
+                        .collect(Collectors.toList());
+
+        Long totalOrderCounts = orderRepository.countOrder(email);
+        return new PageImpl<>(orderHistoryDtos, pageable, totalOrderCounts);
+    }
+
+
+    private OrderHistoryDto createOrderHistoryDto(Order order) {
+        OrderHistoryDto orderHistoryDto = new OrderHistoryDto(order);
+        orderHistoryDto.setOrderItemDtos(createOrderItemDtos(order));
+        return orderHistoryDto;
+    }
+
+    private List<OrderItemDto> createOrderItemDtos(Order order) {
+        List<OrderItem> orderItems = order.getOrderItems();
+        return orderItems.stream()
+                .map(this::createOrderItemDto)
+                .collect(Collectors.toList());
+    }
+
+    private OrderItemDto createOrderItemDto(OrderItem orderItem) {
+        ItemImage itemImage = itemImageRepository.findByItemIdAndRepresentativeImageYn(orderItem.getItem().getId(), "Y");
+        String imageUrl = itemImage.getImageUrl();
+        return new OrderItemDto(orderItem, imageUrl);
+    }
+
+    private UserAccount findUserAccountByEmail(String email) {
+        return userAccountRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //
 //    public Page<OrderHistoryDto> getOrders(String email, Pageable pageable){
 //        List<Order> orders = orderRepository.findOrders(email, pageable);
@@ -198,35 +291,6 @@ public class OrderService {
 //        return new PageImpl<>(orderHistoryDtos, pageable, totalOrderCounts);
 //    }
 
-    public Page<OrderHistoryDto> getOrders(String email, Pageable pageable) {
-        List<OrderHistoryDto> orderHistoryDtos =
-                orderRepository.findOrders(email, pageable).stream()
-                        .map(this::createOrderHistoryDto)
-                        .collect(Collectors.toList());
-
-        Long totalOrderCounts = orderRepository.countOrder(email);
-        return new PageImpl<>(orderHistoryDtos, pageable, totalOrderCounts);
-    }
-
-    private OrderHistoryDto createOrderHistoryDto(Order order) {
-        OrderHistoryDto orderHistoryDto = new OrderHistoryDto(order);
-        orderHistoryDto.setOrderItemDtos(createOrderItemDtos(order));
-        return orderHistoryDto;
-    }
-
-    private List<OrderItemDto> createOrderItemDtos(Order order) {
-        List<OrderItem> orderItems = order.getOrderItems();
-        return orderItems.stream()
-                .map(this::createOrderItemDto)
-                .collect(Collectors.toList());
-    }
-
-    private OrderItemDto createOrderItemDto(OrderItem orderItem) {
-        ItemImage itemImage = itemImageRepository.findByItemIdAndRepresentativeImageYn(orderItem.getItem().getId(), "Y");
-        String imageUrl = itemImage.getImageUrl();
-        return new OrderItemDto(orderItem, imageUrl);
-    }
-
 
 //
 //
@@ -261,22 +325,3 @@ public class OrderService {
 //
 //
 
-
-    @Transactional(readOnly = true)
-    public boolean validateOrder(Long orderId, String email) {
-        UserAccount currentUser = userAccountRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
-        Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
-        UserAccount savedUser = order.getUserAccount();
-
-        return (currentUser == savedUser);
-    }
-
-    public void cancelOrder(Long orderId) {
-        orderRepository.
-                findById(orderId)
-                .orElseThrow(EntityNotFoundException::new)
-                .cancelOrder();
-    }
-
-
-}

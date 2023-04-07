@@ -117,7 +117,7 @@
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
 
-            var url = "/cart/order";
+            var url = "/cart/orders";
 
             var dataList = new Array();
             var paramData = new Object();
@@ -129,7 +129,7 @@
                 dataList.push(data);
             });
 
-            paramData['cartOrderDtoList'] = dataList;
+            paramData['cartOrderDtos'] = dataList;
 
             var param = JSON.stringify(paramData);
 
@@ -146,7 +146,7 @@
                 cache   : false,
                 success  : function(result, status){
                     alert("주문이 완료 되었습니다.");
-                    location.href='/order';
+                    location.href='/orders';
                 },
                 error : function(jqXHR, status, error){
 

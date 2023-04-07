@@ -3,22 +3,23 @@ package ssipgeukbbok.shoppingjpapractice.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import javax.persistence.EntityNotFoundException;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.thymeleaf.util.StringUtils;
 import ssipgeukbbok.shoppingjpapractice.domain.item.Cart;
 import ssipgeukbbok.shoppingjpapractice.domain.item.CartItem;
 import ssipgeukbbok.shoppingjpapractice.domain.item.Item;
 import ssipgeukbbok.shoppingjpapractice.domain.user.UserAccount;
 import ssipgeukbbok.shoppingjpapractice.dto.CartDetailDto;
 import ssipgeukbbok.shoppingjpapractice.dto.CartItemDto;
+import ssipgeukbbok.shoppingjpapractice.dto.CartOrderDto;
+import ssipgeukbbok.shoppingjpapractice.dto.OrderDto;
 import ssipgeukbbok.shoppingjpapractice.respository.CartItemRepository;
 import ssipgeukbbok.shoppingjpapractice.respository.CartRepository;
 import ssipgeukbbok.shoppingjpapractice.respository.ItemRepository;
 import ssipgeukbbok.shoppingjpapractice.respository.UserAccountRepository;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +31,6 @@ public class CartService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
     private final OrderService orderService;
-
 
     public Long addCartItems(CartItemDto cartItemDto, String email) {
         Item item = getItemById(cartItemDto.getItemId());
@@ -53,40 +53,32 @@ public class CartService {
         }
     }
 
-
     @Transactional(readOnly = true)
-    public List<CartDetailDto> getCartItems(String email){
+    public List<CartDetailDto> getCartItems(String email) {
         List<CartDetailDto> cartDetailDtos = new ArrayList<>();
 
         UserAccount userAccount = getUserAccountByEmail(email);
         Cart cart = getCartByUserAccountId(userAccount.getId());
 
-        if (cart == null){
+        if (cart == null) {
             return cartDetailDtos;
         }
 
         return cartItemRepository.findCartDetailDtos(cart.getId());
-
     }
-
-
 
 
     @Transactional(readOnly = true)
-    public boolean validateCartItem(Long cartItemId, String email){
-        UserAccount curMember = userAccountRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
-        CartItem cartItem = cartItemRepository.findById(cartItemId)
-                .orElseThrow(EntityNotFoundException::new);
+    public boolean validateCartItem(Long cartItemId, String email) {
+        UserAccount currentUserAccount = userAccountRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
+        CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(EntityNotFoundException::new);
         UserAccount savedMember = cartItem.getCart().getUserAccount();
 
-        if(!StringUtils.equals(curMember.getEmail(), savedMember.getEmail())){
-            return false;
-        }
-
-        return true;
+        return currentUserAccount.getEmail().equals(savedMember.getEmail());
     }
 
-    public void updateCartItemCount(Long cartItemId, Long count){
+
+    public void updateCartItemCount(Long cartItemId, Long count) {
         CartItem cartItem = cartItemRepository.findById(cartItemId)
                 .orElseThrow(EntityNotFoundException::new);
 
@@ -99,9 +91,84 @@ public class CartService {
         cartItemRepository.delete(cartItem);
     }
 
+//    public Long orderCartItem(List<CartOrderDto> cartOrderDtoList, String email) {
+//        List<OrderDto> orderDtos = new ArrayList<>();
+//
+//        for (CartOrderDto cartOrderDto : cartOrderDtoList) {
+//            CartItem cartItem = getCartItemById(cartOrderDto.getCartItemId());
+//
+//            OrderDto orderDto = new OrderDto();
+//            orderDto.setItemId(cartItem.getItem().getId());
+//            orderDto.setOrderCount(cartItem.getItemCount());
+//            orderDtos.add(orderDto);
+//        }
+//
+//        Long orderId = orderService.placeOrders(orderDtos, email);
+//        for (CartOrderDto cartOrderDto : cartOrderDtoList) {
+//            CartItem cartItem = getCartItemById(cartOrderDto.getCartItemId());
+//
+//            cartItemRepository.delete(cartItem);
+//        }
+//
+//        return orderId;
+//    }
+
+//    public Long orderCartItem(List<CartOrderDto> cartOrderDtoList, String email) {
+//        List<OrderDto> orderDtos = cartOrderDtoList.stream()
+//                .map(cartOrderDto -> {
+//                    CartItem cartItem = getCartItemById(cartOrderDto.getCartItemId());
+//                    OrderDto orderDto = new OrderDto();
+//                    orderDto.setItemId(cartItem.getItem().getId());
+//                    orderDto.setOrderCount(cartItem.getItemCount());
+//                    return orderDto;
+//                })
+//                .collect(Collectors.toList());
+//
+//        Long orderId = orderService.placeOrders(orderDtos, email);
+//
+//        List<Long> cartItemIds = cartOrderDtoList.stream()
+//                .map(CartOrderDto::getCartItemId)
+//                .collect(Collectors.toList());
+//
+//        cartItemRepository.deleteAllByIdIn(cartItemIds);
+//
+//        return orderId;
+//    }
 
 
+    public Long orderCartItem(List<CartOrderDto> cartOrderDtoList, String email) {
+        List<OrderDto> orderDtos = getOrdersFromCartItems(cartOrderDtoList);
+        Long orderId = orderService.placeOrders(orderDtos, email);
 
+        List<Long> cartItemIds = getCartItemIds(cartOrderDtoList);
+        cartItemRepository.deleteAllByIdIn(cartItemIds);
+
+        return orderId;
+    }
+
+    private List<OrderDto> getOrdersFromCartItems(List<CartOrderDto> cartOrderDtoList) {
+        return cartOrderDtoList.stream()
+                .map(cartOrderDto -> {
+                    CartItem cartItem = getCartItemById(cartOrderDto.getCartItemId());
+                    OrderDto orderDto = new OrderDto();
+                    orderDto.setItemId(cartItem.getItem().getId());
+                    orderDto.setOrderCount(cartItem.getItemCount());
+                    return orderDto;
+                })
+                .collect(Collectors.toList());
+    }
+
+    private List<Long> getCartItemIds(List<CartOrderDto> cartOrderDtoList) {
+        return cartOrderDtoList.stream()
+                .map(CartOrderDto::getCartItemId)
+                .collect(Collectors.toList());
+    }
+
+
+    private CartItem getCartItemById(Long cartItemId) {
+        return cartItemRepository.findById(cartItemId)
+                .orElseThrow(EntityNotFoundException::new);
+    }
 
 
     private Item getItemById(Long itemId) {
@@ -116,8 +183,8 @@ public class CartService {
         return cartRepository.findByUserAccountId(userAccountId);
     }
 
-    private Cart createCart(UserAccount member) {
-        Cart cart = Cart.createCart(member);
+    private Cart createCart(UserAccount userAccount) {
+        Cart cart = Cart.createCart(userAccount);
         cartRepository.save(cart);
         return cart;
     }
@@ -129,8 +196,6 @@ public class CartService {
     private CartItem createCartItem(Cart cart, Item item, Long itemCount) {
         return CartItem.createCartItem(cart, item, itemCount);
     }
-
-
 
 
 }
