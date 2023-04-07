@@ -40,7 +40,7 @@ ul {
     margin-bottom: 10px;
 }
 
-input[type="text"], input[type="submit"], input[type="button"] {
+input[type="text"],input[type="password"], input[type="submit"], input[type="button"] {
     width: 250px;
     height: 30px;
     margin-bottom: 10px;
@@ -49,7 +49,7 @@ input[type="text"], input[type="submit"], input[type="button"] {
     cursor: pointer;
 }
 
-input[type="text"]:focus, input[type="submit"]:focus, input[type="button"]:focus{
+input[type="text"]:focus, input[type="submit"]:focus, input[type="button"]:focus,input[type="password"]:focus{
     color: #3A1D1D;
     outline: none;
 }
@@ -57,7 +57,7 @@ input[type="submit"]:focus{
     color: #ff4861;
 }
 
-input[type="text"], input[type="submit"]{
+input[type="text"],input[type="password"], input[type="submit"]{
     border: 1px solid #FF5F75;
     border-radius: 5px;
 }
@@ -65,12 +65,12 @@ input[type="text"]{
     transition: 0.2s;
 }
 
-input[type="text"]:focus{
+input[type="text"]:focus,input[type="password"]:focus{
     box-shadow: 0px 0px 3px 1px #ffdde1;
     cursor: text;
 }
 
-input[type="text"]::placeholder{
+input[type="text"]::placeholder,input[type="password"]::placeholder{
 color: #ffc3ca;
 }
 

@@ -4,7 +4,7 @@ footer{
     color: #60423b;
     border-top: 1px solid #ecd8d8;
     border-bottom: 1px solid #ecd8d8;
-    display: none;
+    display: flex;
     font-size: 13px;
     height: 280px ;
 }
@@ -32,6 +32,12 @@ footer li{
 
 .gray{
     color: #ababab;
+}
+
+@media screen and (max-width: 880px) {
+    footer{
+        display: none;
+    }
 }
 
 

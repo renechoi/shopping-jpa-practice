@@ -35,15 +35,19 @@ ul {
     display: flex;
     justify-content: space-between;
     padding: 0 60px;
-    color: white;
     background-color: #FF5F75;
     font-size: 16px;
 }
-.head a{
+.head div a{
+    text-decoration: none;
     color: white;
 }
-
-
+.createBusiness {
+    display: flex;
+}
+.top-business {
+    margin-right: 20px;
+}
 .topList li.log, .createBusiness {
     line-height: 33px;
     cursor: pointer;
@@ -51,7 +55,7 @@ ul {
     margin: 5px 0;
 }
 
-.topList .log:hover, .createBusiness:hover {
+.topList .log:hover, .top-business:hover {
     animation: twinkle 0.15s linear;
     animation-iteration-count: 4;
     animation-direction: alternate;
@@ -132,15 +136,16 @@ ul {
 }
 
 
+
 .topHoverMenu {
     display: none;
     position: absolute;
     top: 43px;
     right: 56px;
-    width: 100px;
-    height: 200px;
+    min-width: 100px;
+    height: 230px;
     /*border: 1px solid black;*/
-    z-index: 100;
+    z-index: 120;
 }
 
 .ladder {
@@ -181,7 +186,11 @@ hr {
 
 
 ul.menuBox li a {
+    text-decoration: none;
     color: #60423b;
+}
+#midiMenu a{
+    color: #3A1D1D;
 }
 
 .main2 {
@@ -199,10 +208,10 @@ ul.menuBox li a {
     color: #60423b;
     display: none;
     position: absolute;
-    top: 116.8px;
+    top: 120px;
     z-index: 100;
     width: 100%;
-    height: calc(100% - 116.8px);
+    height:100%;
     border-top: 1px solid #cbcbcb;
     background-color: white;
 }
@@ -217,6 +226,8 @@ ul.menuBox li a {
 }
 
 .midiMenu ul {
+    height: 100%;
+    background-color: white;
     padding: 20px;
     font-size: 20px;
 }
@@ -254,7 +265,6 @@ li.line:hover {
 
 @media screen and (max-width: 880px) {
 
-
     .main {
         display: none
     }
@@ -291,7 +301,15 @@ li.line:hover {
 
 }
 
-@media screen and (max-width: 560px){
+@media screen and (max-width: 600px) {
+    .head{
+        padding: 0 30px;
+    }
+
+}
+
+@media screen and (max-width: 400px){
+
     .topDog{
         right: 20px;
         bottom: 20px;

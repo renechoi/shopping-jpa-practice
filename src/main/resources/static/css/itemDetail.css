@@ -1,0 +1,386 @@
+#itemDetailContainer {
+    padding: 0 15%;
+}
+
+input {
+    outline: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+.d-flex {
+    width: 100%;
+}
+
+#itemDetailMainImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.SellStatus_ItemName {
+    display: flex;
+}
+
+.ChooseAmountBox {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.wd50 {
+    width: calc(50% - 10PX);
+    padding: 10px 0px 20px 0px;
+    text-align: right;
+    position: relative;
+}
+
+#BuyBox {
+    display: flex;
+}
+
+.repImgDiv {
+    margin-right: 10px;
+    width: 50%;
+    min-height: 250px;
+    max-height: 600px;
+    border: 1px solid #cbbfbf;
+    border-radius: 5px;
+}
+
+#SoldOut {
+    cursor: default;
+    text-align: center;
+    width: 50px;
+    height: 20px;
+    background: #ff415a;
+    border-radius: 5px;
+    color: white;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.statusClass {
+    margin-right: 5px;
+}
+
+#SoldOutName {
+    color: #726b6b;
+}
+
+.itemDetailName {
+    cursor: default;
+    font-size: 20px;
+}
+
+#orderCount {
+    text-align: center;
+    width: 70px;
+    height: 30px;
+    margin: 0 3px;
+    border: 1px solid #FF5F75;
+    border-radius: 3px;
+}
+
+#minusAmount, #plusAmount {
+    color: #ff4f67;
+    cursor: pointer;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #FF5F75;
+    border-radius: 3px;
+    background-color: #fff2f2;
+}
+
+#minusAmount:hover, #plusAmount:hover {
+    background-color: #ffe2e2;
+}
+
+#minusAmount {
+    margin-left: 10px;
+}
+
+#totalPrice {
+    font-size: 27px;
+    color: red;
+    font-weight: bold;
+}
+
+.totalWon, .chong {
+    position: relative;
+    top: 3px;
+    font-size: 21px;
+    color: #3A1D1D;
+}
+
+.chong {
+    margin-right: 5px;
+}
+
+.addBtn {
+    display: flex;
+    width: 158px;
+    justify-content: flex-end;
+}
+
+.cost {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.OriginalCost {
+    font-size: 16px;
+    color: #bdb1b1;
+    text-decoration: line-through;
+    margin-right: 10px;
+    position: relative;
+    bottom: 1px;
+}
+
+.getCart, .getOrder {
+    height: 40px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.getCart:enabled, .getOrder:enabled {
+    cursor: pointer;
+    background: #ff415a;
+    border: none;
+    color: white;
+}
+
+.getCart:enabled {
+    background: #ff7688;
+}
+
+.getCart:enabled:hover, .getOrder:enabled:hover {
+    animation: moving 0.15s linear;
+    animation-iteration-count: 4;
+    animation-direction: alternate;
+}
+
+@keyframes moving {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(1deg);
+    }
+}
+
+.getCart {
+    width: calc(40% - 5px);
+}
+
+.getOrder {
+    width: calc(60% - 5px);
+}
+
+.lastOrderTurn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+}
+
+.chooseProduct {
+    position: absolute;
+    bottom: 50px;
+    right: 0;
+    width: 100%;
+}
+
+.totalflexBox {
+    display: flex;
+}
+
+.EXDiv{
+    margin-top: 50px;
+}
+
+.explainDiv{
+    border: 1px solid #ff6879;
+    border-bottom: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 150px;
+    text-align: center;
+    padding: 10px;
+    color: #ff6879;
+}
+
+.lead{
+    width: 100%;
+    border: 1px solid #ff6879;
+    height: auto;
+    padding: 20px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    color: #60423b;
+}
+.imgCenter {
+    padding: 1% 10%;
+}
+
+.imgCenter img{
+    width: 100%;
+}
+
+
+/*----------------------------------------------------------------------------------*/
+
+
+
+@media screen and (max-width: 880px) {
+
+
+    #itemDetailContainer {
+        margin-bottom: 100px;
+        padding: 0 10%;
+    }
+
+}
+
+@media screen and (max-width: 780px) {
+    #itemDetailContainer {
+        margin-bottom: 100px;
+    }
+    .itemDetailName {
+        font-size: 18px;
+    }
+
+    .cost {
+        margin-bottom: 0;
+    }
+
+    .ChooseAmountBox {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    #itemDetailContainer {
+        padding: 0 10%;
+    }
+
+    .lastOrderTurn {
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+
+    }
+
+    .chooseProduct {
+        bottom: 70px;
+
+    }
+
+    .getCart, .getOrder {
+        height: 30px;
+        font-size: 15px;
+        border-radius: 4px;
+    }
+
+    .cost {
+        margin-bottom: 0;
+    }
+
+    .getCart {
+        width: 136px;
+
+    }
+
+    .getOrder {
+        width: 100%;
+        margin-top: 4px;
+    }
+
+    #totalPrice {
+        font-size: 22px;
+
+    }
+
+    .totalWon, .chong {
+        top: 1.5px;
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 660px) {
+    #itemDetailContainer {
+        margin-bottom: 100px;
+    }
+    .itemDetailName {
+        font-size: 18px;
+    }
+    .cost {
+        margin-bottom: 0;
+    }
+
+    .ChooseAmountBox {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .lastOrderTurn {
+        align-items: flex-end;
+        flex-direction: column;
+    }
+
+    .getCart, .getOrder {
+        height: 30px;
+        font-size: 15px;
+        border-radius: 4px;
+    }
+
+    .chooseProduct {
+        bottom: 70px;
+
+    }
+
+    #minusAmount, #plusAmount {
+        width: 25px;
+        height: 25px;
+    }
+
+    #orderCount {
+        height: 25px;
+    }
+
+
+    .addBtn {
+        width: 140px;
+    }
+
+    .getCart {
+        width: 126px;
+    }
+
+}
+
+@media screen and (max-width: 560px) {
+
+    #BuyBox {
+        margin-top: 20px;
+    }
+
+    .cost {
+        font-size: 15px;
+    }
+
+    .itemDetailName {
+        font-size: 15px;
+    }
+
+    #totalPrice {
+        font-size: 19px;
+    }
+
+    .totalWon, .chong {
+        top: 2px;
+        font-size: 16px;
+    }
+}

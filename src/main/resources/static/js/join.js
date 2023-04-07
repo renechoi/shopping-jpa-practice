@@ -21,12 +21,13 @@ function checkSameWithPass(){
 function checkPassBlank(){
 
 }
-
 function addAddrDetail(){
     var address = document.getElementById("address");
+    var zipcode = document.getElementById("sample6_postcode");
     var  addr = document.getElementById("sample6_address");
     var detailAddr = document.getElementById("sample6_detailAddress");
     var addretc = document.getElementById("sample6_extraAddress");
 
-    address.value = addr.value + " " + detailAddr.value + " " + addretc.value;
+    address.value ="( "+ zipcode.value +" )"+" "+ addr.value + " " + detailAddr.value + " " + addretc.value;
+    console.log(address.value);
 }

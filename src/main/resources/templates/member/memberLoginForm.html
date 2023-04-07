@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout1}">
+      >
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<div layout:fragment="content">
+<div>
     <a th:href="@{/}">
         <img class="logo-img" th:src="@{/images/PetkPetk-logo_Kor.png}" title="메인으로 가기">
     </a>

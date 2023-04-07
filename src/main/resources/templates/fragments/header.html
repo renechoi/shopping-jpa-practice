@@ -3,41 +3,126 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div th:fragment="header">
-    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="/">Shop</a>
+    <div>
+        <a th:href="@{#}"><img id="topDog" class="topDog" th:src="@{/images/topDog(1).png}" onmouseover="movingTopDog()"
+                               onmouseout="stopTopDog()" title="TOP"></a>
+    </div>
 
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-                    <a class="nav-link" href="/admin/item/new">상품 등록</a>
-                </li>
-                <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
-                    <a class="nav-link" href="/admin/items">상품 관리</a>
-                </li>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/cart">장바구니</a>
-                </li>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/orders">구매이력</a>
-                </li>
-                <li class="nav-item" sec:authorize="isAnonymous()">
-                    <a class="nav-link" href="/members/login">로그인</a>
-                </li>
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/members/logout">로그아웃</a>
+
+    <div class="head">
+
+        <div class="createBusiness">
+            <div class="top-business"><a >사업 등록</a></div>
+            <div class="top-business"><a th:href="@{/admin/item/new}" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품 등록</a></div>
+            <div class="top-business"><a th:href="@{/admin/items}" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품 관리</a></div>
+        </div>
+
+        <!---------------------------- if user == null -------------------------->
+        <div class="logOut" sec:authorize="isAnonymous()">
+            <ul class="flex justifyContent topList">
+                <li class="log"><a th:href="@{/members/login}">로그인</a></li>
+            </ul>
+        </div>
+        <!----------------------------------------------------------------------->
+        <!---------------------------- if user != null --------------------------->
+        <div class="logIn" sec:authorize="isAuthenticated()">
+            <ul class="flex justifyContent topList">
+                <li class="log"><a th:href="@{/members/logout}">로그아웃</a></li>
+                <li onmouseleave="hideMenu()">
+                    <a>
+                        <a>
+                            <div class="profile Pone" onmouseover="showMenu()"></div>
+                        </a>
+                        <a>
+                            <div class="profile Ptwo"></div>
+                        </a>
+                    </a>
+                    <div id="topHoverMenu" class="topHoverMenu">
+                        <img class="ladder" th:src="@{/images/ladder.png}">
+                        <ul class="menuBox">
+                            <li class="nickName">내 닉네임</li>
+                            <li class="menus"><a>마이 페이지</a></li>
+                            <li class="menus"><a th:href="@{/cart}">장바구니</a></li>
+                            <li class="menus"><a th:href="@{/order}">구매 이력</a></li>
+                            <li class="menus"><a th:href="@{/QnA}">QnA</a></li>
+                            <li class="menus" ><a th:href="@{/members/logout}">로그아웃</a></li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0" th:action="@{/}" method="get">
-                <input name="searchQuery" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
-    </nav>
-</div>
+        <!----------------------------------------------------------------------->
+    </div>
 
+    <div id="main" class="flex justifyContent main" sec:authorize="isAnonymous()">
+        <a th:href="@{/}"><img class="logo-img" th:src="@{/images/PetkPetk-logo_Kor.png}"></a>
+        <nav>
+            <ul class="mainMenu">
+                <li><a>쇼핑</a></li>
+                <li><a>커뮤니티</a></li>
+                <li><a>ABOUT</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="main" class="flex justifyContent main" sec:authorize="isAuthenticated()" onmouseover="hideMenu()">
+        <a th:href="@{/}"><img class="logo-img" th:src="@{/images/PetkPetk-logo_Kor.png}"></a>
+        <nav>
+            <ul class="mainMenu">
+                <li><a>쇼핑</a></li>
+                <li><a>커뮤니티</a></li>
+                <li><a>ABOUT</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="main2" class="flex justifyContent main2">
+        <a th:href="@{/}"><img class="logo-img" th:src="@{/images/PetkPetk-logo_Kor.png}"></a>
+        <div>
+            <img class="menubar" th:src="@{/images/menubar.png}" onclick="menuToggle()">
+        </div>
+    </div>
+
+    <div id="midiMenu" class="midiMenu">
+        <ul id="midi">
+            <li><a>쇼핑 <span>Shopping</span></a></li>
+            <li><a>커뮤니티 <span>Community</span></a></li>
+            <li><a>ABOUT</a></li>
+            <li><a>QnA</a></li>
+            <div class="line"></div>
+            <!------------------------------ if user == null ------------------------------>
+            <li><a>마이 페이지 <span>My Page</span></a></li>
+
+            <!-- 모두 이용 가능 -->
+            <li><a th:href="@{/cart}">장바구니 <span>Cart</span></a></li>
+
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/order}">구매 이력 <span>purchase history</span></a></li>
+
+            <!------------------------------ if user == null ------------------------------>
+            <li sec:authorize="isAnonymous()"><a th:href="@{/members/login}">로그인 </a><span>Login</span></li>
+
+            <!------------------------------ if user != null ------------------------------>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/members/logout}">로그아웃 </a><span>Logout</span></li>
+        </ul>
+
+    </div>
+
+
+    <div class="NoticeSearchZone" id="NoticeSearchZone">
+
+        <div class="noticeBox flex">
+            <img class="noticeDog" th:src="@{/images/notice-dog.png}" title="공지사항 바로가기">
+            <div class="noticeZone flex">
+                <a href="" title="메인 공지">여기는 공지사항</a>
+            </div>
+        </div>
+        <form id="searchForm" th:action="@{/}" method="get">
+            <div class="searchZone">
+                <input type="text" name="searchQuery" maxlength="40" autocomplete="off">
+                <input type="submit" value="검색">
+            </div>
+        </form>
+        <hr>
+    </div>
+
+</div>
 </html>

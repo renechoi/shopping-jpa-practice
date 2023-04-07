@@ -1,11 +1,15 @@
 package ssipgeukbbok.shoppingjpapractice.service;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
+
 import ssipgeukbbok.shoppingjpapractice.domain.contstant.ItemSellStatus;
 import ssipgeukbbok.shoppingjpapractice.domain.item.CartItem;
 import ssipgeukbbok.shoppingjpapractice.domain.item.Item;
@@ -14,10 +18,6 @@ import ssipgeukbbok.shoppingjpapractice.dto.CartItemDto;
 import ssipgeukbbok.shoppingjpapractice.respository.CartItemRepository;
 import ssipgeukbbok.shoppingjpapractice.respository.ItemRepository;
 import ssipgeukbbok.shoppingjpapractice.respository.UserAccountRepository;
-
-import javax.persistence.EntityNotFoundException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Transactional
@@ -61,7 +61,7 @@ class CartServiceTest {
         cartItemDto.setItemCount(5L);
         cartItemDto.setItemId(item.getId());
 
-        Long cartItemId = cartService.addCart(cartItemDto, member.getEmail());
+        Long cartItemId = cartService.addCartItems(cartItemDto, member.getEmail());
         CartItem cartItem = cartItemRepository.findById(cartItemId)
                 .orElseThrow(EntityNotFoundException::new);
 

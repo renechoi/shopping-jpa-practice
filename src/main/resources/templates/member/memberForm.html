@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout1}">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Join</title>
@@ -9,7 +7,6 @@
 </head>
 
 <!-- 사용자 스크립트 추가 -->
-<th:block layout:fragment="script">
 
     <script th:inline="javascript">
         $(document).ready(function () {
@@ -20,11 +17,10 @@
         });
     </script>
 
-</th:block>
 <body>
 <form action="/members/new" role="form" method="post" th:object="${memberFormDto}">
 
-    <div layout:fragment="content" class="container">
+    <div class="container">
         <div id="img">
             <a th:href="@{/}" title="메인으로 가기"><img id="logo-img" th:src="@{/images/PetkPetk-logo_Kor.png}"></a>
         </div>
@@ -77,7 +73,6 @@
                 <br>Go for login
             </p></a>
     </div>
-    <th:block layout:fragment="script">
 
         <script th:src="@{/js/join.js}" type="text/javascript"></script>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -130,7 +125,6 @@
                 }).open();
             }
         </script>
-    </th:block>
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 </form>
 
